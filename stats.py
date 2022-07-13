@@ -2,6 +2,8 @@
 # 13 July 2022
 
 import datetime
+import sys
+
 from bs4 import BeautifulSoup
 
 # there's a library to figure this out,
@@ -35,8 +37,8 @@ def extract_date_posts(filename):
     return posts
 
 def main():
-    posts_by_day = extract_date_posts('inp.html')
-    print(posts_by_day)
+    filename = sys.argv[1] if len(sys.argv) > 1 else 'inp.html'
+    posts_by_day = extract_date_posts(filename)
 
     # start date seems to be May 2011, so let's start from 2011
     today = datetime.date.today()
@@ -61,7 +63,6 @@ def main():
             if year == today.year and month == (today.month):
                 # avoid unnecessarily looking into the future
                 break
-
     print("\n")
 
 if __name__ == '__main__':
